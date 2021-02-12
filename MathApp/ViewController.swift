@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         var index = 0
         while index < 40 {
-            if isPrime(index) == true {
+            if isPrime(index) {
                 numbers.append(index)
             }
             index += 1
