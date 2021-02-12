@@ -45,7 +45,7 @@ class ViewController: UIViewController {
                 
                 let next = (self.numbers.last!+1...self.numbers.last! + 100).map { $0 }
                 for index in next {
-                    if self.isPrime(index) == true {
+                    if self.isPrime(index) {
                         self.numbers.append(index)
                     }
                 }
