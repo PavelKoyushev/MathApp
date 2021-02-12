@@ -34,26 +34,6 @@ class ViewController: UIViewController {
     func isPrime(_ number: Int) -> Bool {
         return number > 1 && !(2..<number).contains { number % $0 == 0 }
     }
-}
-
-extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: tableIdentifier, for: indexPath) as! NumbersCollectionViewCell
-        cell.numberLabel.text = "\(self.numbers[indexPath.item])"
-        
-//        var cellColor: UIColor
-//
-//        if indexPath.item % 4 == 0 {
-//            cellColor = UIColor.gray
-//        } else {
-//            cellColor = UIColor.white
-//        }
-//
-//        cell.backgroundColor = cellColor
-        
-        return cell
-    }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
@@ -74,6 +54,39 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
             }
         }
     }
+}
+
+//MARK: - CollectionView methods
+extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of items
+        return numbers.count
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: tableIdentifier, for: indexPath) as! NumbersCollectionViewCell
+        cell.numberLabel.text = "\(self.numbers[indexPath.item])"
+        
+//        var cellColor: UIColor
+//        if indexPath.item % 4 == 0 {
+//            cellColor = UIColor.gray
+//        } else {
+//            cellColor = UIColor.white
+//        }
+//        cell.backgroundColor = cellColor
+        
+        return cell
+    }
+}
+
+//MARK: - Collection view flow layout methods
+extension ViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 5
@@ -82,17 +95,6 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 5
     }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return numbers.count
-    }
-
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var sizeHeight: CGFloat = 0.0
@@ -113,4 +115,3 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
         return CGSize(width: sizeWidth, height: sizeHeight)
     }
 }
-
